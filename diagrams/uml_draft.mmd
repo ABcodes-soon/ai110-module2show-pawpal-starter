@@ -1,0 +1,36 @@
+classDiagram
+    class Owner {
+        +String name
+        +String contact_info
+        +list~Pet~ pets
+        +add_pet(pet)
+        +view_daily_plan()
+    }
+
+    class Pet {
+        +String name
+        +String species
+        +String care_needs
+        +list~Task~ tasks
+        +add_task(task)
+        +get_task_summary()
+    }
+
+    class Task {
+        +String title
+        +int duration_minutes
+        +String priority
+        +String category
+        +bool recurring
+        +update_task(details)
+        +mark_complete()
+    }
+
+    class Scheduler {
+        +int available_time_minutes
+        +list~Task~ tasks
+        +generate_daily_plan()
+        +explain_plan()
+    }
+
+
