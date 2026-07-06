@@ -56,19 +56,34 @@ Paste a sample of your app's CLI or Streamlit output here so a reader can see wh
 
 ## 🧪 Testing PawPal+
 
+Run the full automated test suite with:
+
 ```bash
-# Run the full test suite:
-pytest
-
-# Run with coverage:
-pytest --cov
+python -m pytest
 ```
 
-Sample test output:
+These tests cover the core scheduler behaviors, including:
+- sorting tasks by time and priority
+- filtering tasks by pet name or completion status
+- recurring daily-task creation after completion
+- conflict detection for overlapping task times
+- basic pet and owner task management
 
+Successful test run output:
+
+```text
+============================= test session starts ==============================
+platform win32 -- Python 3.13.11, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\abhin\Downloads\project_learn\ai110-module2show-pawpal-starter
+collected 10 items
+
+tests\test_pawpal.py .....                                               [ 50%]
+tests\test_pawpal_system.py .....                                        [100%]
+
+============================== 10 passed in 0.12s ==============================
 ```
-3 passed in 0.12s
-```
+
+Confidence Level: ⭐⭐⭐⭐⭐
 
 ## Sample Output
 
