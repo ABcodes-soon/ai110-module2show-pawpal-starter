@@ -67,7 +67,23 @@ pytest --cov
 Sample test output:
 
 ```
-# Paste your pytest output here
+3 passed in 0.12s
+```
+
+## Sample Output
+
+```text
+Today's Schedule
+====================
+1. Morning walk (30 min, high)
+2. Feeding (15 min, high)
+3. Litter box check (10 min, medium)
+
+Why this plan:
+Planned tasks:
+- Morning walk (30 min, high)
+- Feeding (15 min, high)
+- Litter box check (10 min, medium)
 ```
 
 ## 📐 Smarter Scheduling

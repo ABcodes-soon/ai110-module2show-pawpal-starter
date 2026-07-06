@@ -5,16 +5,17 @@
 **a. Initial design**
 
 - My initial UML design centers on four main classes: Owner, Pet, Task, and Scheduler.
-- The Owner class represents the person using the app and can manage one or more pets.
-- The Pet class stores the pet’s basic details and keeps track of that pet’s care tasks.
-- The Task class represents a single care activity such as a walk, feeding, medication, or grooming, with attributes like title, duration, priority, and recurrence.
-- The Scheduler class evaluates the tasks for a pet and produces a daily plan that respects the owner’s available time and task priorities.
+- The Owner class represents the person using the app and is responsible for managing one or more pets and viewing the overall daily plan.
+- The Pet class represents an individual animal and stores basic information such as name, species, and care needs while also holding the tasks associated with that pet.
+- The Task class represents one care activity, such as a walk, feeding, medication, or grooming, and holds details like title, duration, priority, category, and whether it repeats.
+- The Scheduler class is responsible for reviewing the available tasks and generating a daily schedule that considers time limits and task priorities.
 - Three core actions a user should be able to perform are: 1) add a pet profile for their animal, 2) create or edit care tasks with details such as duration and priority, and 3) generate and view a daily schedule that shows what needs to be done today.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+- I reviewed the class skeleton in the logic layer and confirmed that the core structure was already clear, so I kept the main design intact.
+- One small refinement I made was to make the Scheduler responsible for evaluating tasks and generating a daily plan while keeping the Pet and Owner classes focused on storing data and managing relationships.
+- This change helps keep the responsibilities separated and avoids putting too much scheduling logic into the Pet or Owner classes.
 
 **c. Building blocks**
 
