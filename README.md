@@ -88,14 +88,14 @@ Planned tasks:
 
 ## 📐 Smarter Scheduling
 
-> Fill in once you've implemented scheduling logic.
+The scheduler now includes a few lightweight intelligence features to make task planning more useful for a busy pet owner.
 
 | Feature | Method(s) | Notes |
 |---------|-----------|-------|
-| Task sorting | | e.g., by priority, duration |
-| Filtering | | e.g., skip tasks if time runs out |
-| Conflict handling | | e.g., overlapping time slots |
-| Recurring tasks | | e.g., daily vs. weekly |
+| Sorting behavior | `Scheduler.sort_by_time()` | Orders tasks by their scheduled time of day, then by priority and duration. |
+| Filtering behavior | `Scheduler.filter_tasks()` | Lets the program view only tasks that match a completion state or a specific pet name. |
+| Conflict detection | `Scheduler.detect_conflicts()` | Warns when two tasks overlap in time so the owner can adjust the plan. |
+| Recurring tasks | `Task.mark_complete()` | When a daily or weekly task is completed, a new incomplete task is created for the next occurrence. |
 
 ## 📸 Demo Walkthrough
 

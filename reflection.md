@@ -35,8 +35,8 @@
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+- One tradeoff my scheduler makes is that it uses a lightweight conflict check based on each task's start time and duration, rather than a more complex calendar-style planner. This keeps the logic simple and easy to understand, but it means the program warns about overlaps in a straightforward way without trying to solve every scheduling edge case.
+- I also reviewed a more compact, Pythonic version of the conflict-detection logic, but I kept the explicit loop-based version because it is easier for a human reader to follow and debug.
 
 ---
 
