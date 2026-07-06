@@ -12,6 +12,17 @@ A busy pet owner needs help staying consistent with pet care. They want an assis
 
 Your job is to design the system first (UML), then implement the logic in Python, then connect it to the Streamlit UI.
 
+## Classes
+
+The system is built around four core classes (see `diagrams/uml_final.mmd`):
+
+- **Owner** — represents the person using the app. Holds `name` and `contact_info`, keeps a list of `pets`, and can `add_pet()` and gather every task across all pets with `get_all_tasks()`.
+- **Pet** — represents one animal. Holds `name`, `species`, and `care_needs`, keeps its own list of `tasks`, and can `add_task()` and report a `get_task_summary()`.
+- **Task** — represents a single care activity (walk, feeding, meds, grooming, etc.). Holds `title`, `duration_minutes`, `priority`, `category`, `time_of_day`, `due_date`, `recurring`/`frequency`, and `completed`. Can `update_task()` and `mark_complete()` (which spawns the next occurrence for recurring tasks).
+- **Scheduler** — the "brains." Works across *all* of an owner's pets to `generate_daily_plan()` within a time budget, `sort_by_time()`, `filter_tasks()`, `detect_conflicts()`, and `explain_plan()`.
+
+Relationships: an Owner owns one or more Pets, each Pet contains zero or more Tasks, and the Scheduler plans for an Owner by sorting/filtering/warning on Tasks.
+
 ## What you will build
 
 Your final app should:
@@ -30,6 +41,14 @@ Your final app should:
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+### Running the demo
+
+The end-to-end CLI demo lives in `main.py`. It builds one Owner (Jordan), two Pets (Mochi and Luna), and several Tasks, then runs the Scheduler across both pets to generate a plan, sort tasks, filter by pet, and flag conflicts:
+
+```bash
+python main.py
 ```
 
 ### Suggested workflow
