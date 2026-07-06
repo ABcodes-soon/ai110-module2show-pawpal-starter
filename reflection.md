@@ -30,8 +30,8 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+- The scheduler considers task time of day, duration, priority, and whether a task is completed. It also uses the available daily time window to decide which tasks fit into the plan.
+- I treated time and priority as the most important constraints because they directly affect whether the schedule is realistic and useful for a busy pet owner. Completion status and pet filtering were added as secondary constraints to keep the view organized rather than to change the core plan.
 
 **b. Tradeoffs**
 
@@ -44,13 +44,13 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+- I used my AI coding assistant for design brainstorming, refactoring, debugging, and writing tests. It was especially helpful when I needed to turn the initial UML ideas into working Python classes and when I wanted help deciding how to structure new methods like sorting and conflict detection.
+- The most helpful prompts were ones that asked for a concrete plan or a small change, such as asking how to implement recurring-task behavior or how to keep the scheduler logic readable while adding new features.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+- One example was when the AI suggested a very compact version of the conflict-detection method. It was more Pythonic, but I felt it would be harder for a human reader to follow. I kept the more explicit version instead because it was clearer and easier to debug.
+- I verified AI suggestions by running the tests and checking whether the behavior matched the requirements. In this project, pytest was the most useful verification tool because it confirmed both the happy paths and edge cases.
 
 ---
 
@@ -58,13 +58,13 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+- I tested sorting behavior, filtering behavior, recurring-task creation, conflict detection, and basic task management. These were the most important behaviors because they make the scheduler practical rather than just structurally complete.
+- These tests were important because they verify that the system behaves correctly in everyday scenarios, such as planning a day with multiple tasks or handling overlaps without crashing.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+- I am fairly confident that the current scheduler works correctly for the core scenarios covered by the tests. The automated suite gives good evidence that the main behaviors are working as intended.
+- If I had more time, I would test edge cases like invalid time formats, very long task lists, and tasks that overlap in more complex ways than a simple time-range check.
 
 ---
 
@@ -72,12 +72,12 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+- I am most satisfied with how the scheduler evolved from a simple prototype into a more useful planning tool. The combination of sorting, filtering, recurring logic, and conflict warnings made the app feel much more realistic and polished.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+- In another iteration, I would improve the scheduler by making it smarter about conflicts, such as automatically moving a task to a later time instead of only warning the user. I would also make the UI more interactive so the owner can edit or remove tasks directly.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+- One important lesson was that AI is most effective when it is guided by a clear human architecture. I learned that I still needed to act as the lead architect: deciding what responsibilities belonged to each class, evaluating tradeoffs, and making sure the final design stayed simple and understandable.

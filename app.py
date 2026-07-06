@@ -83,25 +83,54 @@ pet.species = species
 st.markdown("### Tasks")
 st.caption("Add a few tasks. These are stored in the live session state and used by the scheduler.")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 with col1:
     task_title = st.text_input("Task title", value="Morning walk")
 with col2:
     duration = st.number_input("Duration (minutes)", min_value=1, max_value=240, value=20)
 with col3:
     priority = st.selectbox("Priority", ["low", "medium", "high"], index=2)
+with col4:
+    task_time = st.text_input("Time (HH:MM)", value="09:00")
 
 if st.button("Add task"):
-    task = Task(title=task_title, duration_minutes=int(duration), priority=priority)
+    task = Task(
+        title=task_title,
+        duration_minutes=int(duration),
+        priority=priority,
+        time_of_day=task_time,
+        pet_name=pet.name,
+    )
     pet.add_task(task)
+    st.success(f"Added {task.title} for {pet.name} at {task.time_of_day}.")
 
 if pet.tasks:
-    st.write("Current tasks:")
+    scheduler = Scheduler()
+    all_tasks = owner.get_all_tasks()
+    sorted_tasks = scheduler.sort_by_time(all_tasks)
+    pet_filter = st.selectbox("Filter tasks by pet", ["All"] + [current_pet.name for current_pet in owner.pets])
+    filtered_tasks = scheduler.filter_tasks(sorted_tasks, pet_name=pet_filter if pet_filter != "All" else None)
+
+    st.write("Current tasks (sorted by time):")
     task_rows = [
-        {"title": task.title, "duration_minutes": task.duration_minutes, "priority": task.priority}
-        for task in pet.tasks
+        {
+            "pet": task.pet_name or pet.name,
+            "title": task.title,
+            "time": task.time_of_day,
+            "duration_minutes": task.duration_minutes,
+            "priority": task.priority,
+        }
+        for task in filtered_tasks
     ]
     st.table(task_rows)
+
+    conflicts = scheduler.detect_conflicts(all_tasks)
+    if conflicts:
+        st.warning("Possible scheduling conflicts:")
+        for warning in conflicts:
+            st.write(f"- {warning}")
+    else:
+        st.success("No overlapping task times detected.")
 else:
     st.info("No tasks yet. Add one above.")
 
@@ -113,11 +142,19 @@ st.caption("This button uses the stored owner and pet state to generate a schedu
 if st.button("Generate schedule"):
     scheduler = Scheduler(available_time_minutes=60)
     plan = scheduler.generate_daily_plan(owner)
+    conflicts = scheduler.detect_conflicts(owner.get_all_tasks())
 
     if plan:
         st.success("Scheduled tasks:")
         for index, task in enumerate(plan, start=1):
-            st.write(f"{index}. {task.title} ({task.duration_minutes} min, {task.priority})")
+            st.write(f"{index}. {task.title} ({task.duration_minutes} min, {task.priority}) at {task.time_of_day}")
         st.caption(scheduler.explain_plan(owner))
     else:
         st.info("No tasks fit into the available time.")
+
+    if conflicts:
+        st.warning("Conflict warning:")
+        for warning in conflicts:
+            st.write(f"- {warning}")
+    else:
+        st.success("The current task list does not overlap in time.")

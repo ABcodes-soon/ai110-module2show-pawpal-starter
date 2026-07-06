@@ -112,14 +112,46 @@ The scheduler now includes a few lightweight intelligence features to make task 
 | Conflict detection | `Scheduler.detect_conflicts()` | Warns when two tasks overlap in time so the owner can adjust the plan. |
 | Recurring tasks | `Task.mark_complete()` | When a daily or weekly task is completed, a new incomplete task is created for the next occurrence. |
 
-## 📸 Demo Walkthrough
+## � Demo Walkthrough
 
-Describe your app in numbered steps so a reader can follow along without watching a video:
+PawPal+ is designed as a lightweight pet-care planning assistant with a simple Streamlit interface and an underlying scheduler that makes the plan more useful.
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+### Main UI features
+- Add or update owner and pet information
+- Create tasks with a title, duration, priority, and time of day
+- View all tasks in a sorted table
+- Filter tasks by pet name
+- See scheduling conflict warnings when tasks overlap
+- Generate a daily plan based on the available time window
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or link to a demo video here -->
+### Example workflow
+1. Open the app and enter an owner name and pet profile.
+2. Add tasks such as a morning walk, feeding, or litter check with specific times.
+3. Review the sorted task list and any conflict warnings.
+4. Generate the daily schedule to see which tasks fit into the available time.
+5. Mark recurring tasks complete to create the next occurrence for the following day or week.
+
+### Scheduler behaviors shown in the demo
+- Sorting by time with `Scheduler.sort_by_time()`
+- Filtering by pet with `Scheduler.filter_tasks()`
+- Conflict warnings with `Scheduler.detect_conflicts()`
+- Recurring-task creation through `Task.mark_complete()`
+
+### Sample CLI output
+```text
+Today's Schedule
+====================
+1. Play session (20 min, medium)
+2. Morning walk (30 min, high)
+3. Litter box check (10 min, medium)
+
+Sorted tasks by time:
+- Play session at 07:30 for Luna
+- Morning walk at 08:00 for Mochi
+- Feeding conflict at 08:00 for Luna
+- Feeding at 09:30 for Mochi
+- Litter box check at 10:00 for Luna
+
+Conflict warnings:
+- Warning: 'Feeding conflict' (08:00) overlaps with 'Morning walk' (08:00) for Luna.
+```

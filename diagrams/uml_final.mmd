@@ -40,9 +40,7 @@ classDiagram
         +sort_by_time(tasks: List[Task]) List[Task]
         +filter_tasks(tasks: List[Task], completed: bool?, pet_name: str?) List[Task]
         +detect_conflicts(tasks: List[Task]) List[str]
+        -_priority_rank(priority: str) int
+        -_time_to_minutes(time_of_day: str) int
     }
 
-    Owner "1" *-- "1..*" Pet : owns
-    Pet "1" *-- "0..*" Task : contains
-    Scheduler ..> Owner : plans for
-    Scheduler ..> Task : sorts filters warns on
